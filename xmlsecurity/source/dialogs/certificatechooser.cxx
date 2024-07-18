@@ -22,6 +22,7 @@
 #include <certificateviewer.hxx>
 #include <com/sun/star/xml/crypto/XSecurityEnvironment.hpp>
 #include <com/sun/star/xml/crypto/XXMLSecurityContext.hpp>
+#include <com/sun/star/xml/crypto/XXMLSecurityContextInfo.hpp>
 #include <comphelper/sequence.hxx>
 #include <comphelper/xmlsechelper.hxx>
 
@@ -180,6 +181,12 @@ void CertificateChooser::ImplInitialize(bool mbSearch)
     uno::Sequence<uno::Reference< security::XCertificate>> xCerts;
     for (auto& secContext : mxSecurityContexts)
     {
+        auto foo = css::uno::Reference<css::xml::crypto::XXMLSecurityContextInfo>
+                (secContext, css::uno::UNO_QUERY);
+        if (foo.is()) {
+            sal_Int32 bar = foo->getImplNo();
+            SAL_DEBUG(bar);
+        }
         if (!secContext.is())
             continue;
         auto secEnvironment = secContext->getSecurityEnvironment();

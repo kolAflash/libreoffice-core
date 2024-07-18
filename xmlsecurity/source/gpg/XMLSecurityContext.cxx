@@ -33,6 +33,11 @@ sal_Int32 SAL_CALL XMLSecurityContextGpg::addSecurityEnvironment(
     return m_vSecurityEnvironments.size() - 1;
 }
 
+sal_Int32 SAL_CALL XMLSecurityContextGpg::getImplNo()
+{
+    return 42;
+}
+
 sal_Int32 SAL_CALL XMLSecurityContextGpg::getSecurityEnvironmentNumber()
 {
     return m_vSecurityEnvironments.size();
