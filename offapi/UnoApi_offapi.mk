@@ -4300,6 +4300,7 @@ $(eval $(call gb_UnoApi_add_idlfiles,offapi,com/sun/star/xml/crypto,\
 	XXMLEncryption \
 	XXMLEncryptionTemplate \
 	XXMLSecurityContext \
+	XXMLSecurityContextInfo \
 	XXMLSecurityTemplate \
 	XXMLSignature \
 	XXMLSignatureTemplate \
