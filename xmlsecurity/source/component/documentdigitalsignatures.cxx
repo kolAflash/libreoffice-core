@@ -698,6 +698,8 @@ DocumentDigitalSignatures::chooseCertificatesImpl(std::map<OUString, OUString>& 
 
     DocumentSignatureManager aSignatureManager(mxCtx, {});
     if (aSignatureManager.init()) {
+        // X.509 certs are always loaded. But when only GPG is needed CertificateChooser calls getAllCertificates()
+        // which is implemented with an empty result for X.509 (nss+mscrypt). tdf#115884 tdf#161909
         xSecContexts.push_back(aSignatureManager.getSecurityContext());
         // Don't include OpenPGP if only X.509 certs are requested
         if (certificateKind == CertificateKind_NONE || certificateKind == CertificateKind_OPENPGP)
