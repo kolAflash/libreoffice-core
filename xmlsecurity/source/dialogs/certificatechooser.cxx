@@ -197,6 +197,12 @@ void CertificateChooser::ImplInitialize(bool mbSearch)
     uno::Sequence<uno::Reference< security::XCertificate>> xCerts;
     for (auto& secContext : mxSecurityContexts)
     {
+        auto foo = css::uno::Reference<css::xml::crypto::XXMLSecurityContextInfo>
+                (secContext, css::uno::UNO_QUERY);
+        if (foo.is()) {
+            sal_Int32 bar = foo->getImplNo();
+            SAL_DEBUG(bar);
+        }
         if (!secContext.is())
             continue;
         auto secEnvironment = secContext->getSecurityEnvironment();

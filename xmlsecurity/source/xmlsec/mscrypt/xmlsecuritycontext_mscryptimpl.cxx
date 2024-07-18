@@ -20,6 +20,7 @@
 #include <sal/config.h>
 
 #include <com/sun/star/xml/crypto/XXMLSecurityContext.hpp>
+#include <com/sun/star/xml/crypto/XXMLSecurityContextInfo.hpp>
 #include "securityenvironment_mscryptimpl.hxx"
 
 #include <xmlsec/xmlstreamio.hxx>
@@ -37,6 +38,7 @@ using ::com::sun::star::xml::crypto::XXMLSecurityContext ;
 namespace {
 
 class XMLSecurityContext_MSCryptImpl : public ::cppu::WeakImplHelper<
+    css::xml::crypto::XXMLSecurityContextInfo,
     css::xml::crypto::XXMLSecurityContext ,
     css::lang::XServiceInfo >
 {
@@ -66,6 +68,8 @@ class XMLSecurityContext_MSCryptImpl : public ::cppu::WeakImplHelper<
 
         virtual void SAL_CALL setDefaultSecurityEnvironmentIndex( sal_Int32 nDefaultEnvIndex ) override;
 
+        // XXMLSecurityContextInfo
+        virtual sal_Int32 SAL_CALL getImplNo() override;
 
         //Methods from XServiceInfo
         virtual OUString SAL_CALL getImplementationName() override;
@@ -126,6 +130,11 @@ sal_Int32 SAL_CALL XMLSecurityContext_MSCryptImpl::getDefaultSecurityEnvironment
 void SAL_CALL XMLSecurityContext_MSCryptImpl::setDefaultSecurityEnvironmentIndex( sal_Int32 /*nDefaultEnvIndex*/ )
 {
     //dummy
+}
+
+sal_Int32 SAL_CALL XMLSecurityContext_MSCryptImpl::getImplNo()
+{
+    return 2;
 }
 
 /* XServiceInfo */

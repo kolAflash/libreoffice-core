@@ -16,12 +16,14 @@
 #include <com/sun/star/uno/Reference.hxx>
 #include <com/sun/star/lang/XServiceInfo.hpp>
 #include <com/sun/star/xml/crypto/XXMLSecurityContext.hpp>
+#include <com/sun/star/xml/crypto/XXMLSecurityContextInfo.hpp>
 
 #include <vector>
 
 namespace com::sun::star::xml::crypto { class XSecurityEnvironment; }
 
 class XMLSecurityContextGpg : public cppu::WeakImplHelper< css::xml::crypto::XXMLSecurityContext,
+                                                           css::xml::crypto::XXMLSecurityContextInfo,
                                                            css::lang::XServiceInfo>
 {
 private:
@@ -46,6 +48,9 @@ public:
     virtual sal_Int32 SAL_CALL getDefaultSecurityEnvironmentIndex() override;
 
     virtual void SAL_CALL setDefaultSecurityEnvironmentIndex( sal_Int32 nDefaultEnvIndex ) override;
+
+    // XXMLSecurityContextInfo
+    virtual sal_Int32 SAL_CALL getImplNo() override;
 
     // XServiceInfo
     virtual OUString SAL_CALL getImplementationName() override ;
