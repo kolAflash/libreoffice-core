@@ -197,6 +197,8 @@ void CertificateChooser::ImplInitialize(bool mbSearch)
                 if (meAction == CertificateChooserUserAction::Sign || meAction == CertificateChooserUserAction::SelectSign)
                     xCerts = secEnvironment->getPersonalCertificates();
                 else
+                    // X.509 implementations (nss+mscrypt) give an empty result. tdf#115884 tdf#161909
+                    // Only because of this mess "Encrypt with GPG" correct shows only GPG keys.
                     xCerts = secEnvironment->getAllCertificates();
 
                 for (sal_Int32 nCert = xCerts.getLength(); nCert;)
