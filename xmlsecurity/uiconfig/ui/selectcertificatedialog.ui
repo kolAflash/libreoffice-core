@@ -93,7 +93,7 @@
             <child>
               <object class="GtkLabel" id="sign">
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes" context="selectcertificatedialog|sign">Select the certificate you want to use for signing:</property>
+                <property name="label" translatable="yes" context="selectcertificatedialog|sign">Select the certificate you want to use for signing. Depending on the use case this list may only contain GPG or X.509 certificates or both.</property>
                 <property name="wrap">True</property>
                 <property name="width-chars">56</property>
                 <property name="max-width-chars">56</property>
@@ -107,7 +107,7 @@
             <child>
               <object class="GtkLabel" id="encrypt">
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes" context="selectcertificatedialog|encrypt">Select the certificate you want to use for encryption:</property>
+                <property name="label" translatable="yes" context="selectcertificatedialog|encrypt">Select the GPG certificate you want to use for encryption:</property>
                 <property name="wrap">True</property>
                 <property name="width-chars">56</property>
                 <property name="max-width-chars">56</property>
