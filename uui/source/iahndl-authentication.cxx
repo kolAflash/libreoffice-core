@@ -661,7 +661,7 @@ UUIInteractionHelper::handlePasswordRequest(
         if (aAnyRequest >>= aDocumentPasswordRequest2)
         {
             nMode               = aDocumentPasswordRequest2.Mode;
-            aDocumentName       = aDocumentPasswordRequest2.Name;
+            aDocumentName       = aDocumentPasswordRequest2.Name;  // tdf#161909: COMMON CASE for X.509 on Linux => "NSS Certificate DB"
             bIsPasswordToModify = aDocumentPasswordRequest2.IsRequestPasswordToModify;
 
             bDoHandleRequest = true;
@@ -672,7 +672,7 @@ UUIInteractionHelper::handlePasswordRequest(
         if (aAnyRequest >>= aDocumentPasswordRequest)
         {
             nMode               = aDocumentPasswordRequest.Mode;
-            aDocumentName       = aDocumentPasswordRequest.Name;
+            aDocumentName       = aDocumentPasswordRequest.Name;  // tdf#161909: X.509 on Linux => "NSS Certificate DB"
 
             bDoHandleRequest = true;
             break;  // do
@@ -701,7 +701,7 @@ UUIInteractionHelper::handlePasswordRequest(
             break;  // do
         }
     }
-    while (false);
+    while (false);  // TODO tdf#161909: skips the rest via "break" -> crazy!
 
     if (bDoHandleRequest)
     {

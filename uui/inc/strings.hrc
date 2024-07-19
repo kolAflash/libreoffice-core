@@ -23,7 +23,10 @@
 
 #define STR_ENTER_PASSWORD_TO_OPEN              NC_("STR_ENTER_PASSWORD_TO_OPEN", "Enter password to open file: \n")
 #define STR_ENTER_PASSWORD_TO_MODIFY            NC_("STR_ENTER_PASSWORD_TO_MODIFY", "Enter password to modify file: \n")
+
+// tdf#161909 default text if aAnyRequest does not match in iahndl-authentication.cxx
 #define STR_ENTER_SIMPLE_PASSWORD               NC_("STR_ENTER_SIMPLE_PASSWORD", "Enter password: ")
+
 #define STR_CONFIRM_SIMPLE_PASSWORD             NC_("STR_CONFIRM_SIMPLE_PASSWORD", "Confirm password: ")
 #define STR_TITLE_CREATE_PASSWORD               NC_("STR_TITLE_CREATE_PASSWORD", "Set Password")
 #define STR_TITLE_ENTER_PASSWORD                NC_("STR_TITLE_ENTER_PASSWORD", "Enter Password")

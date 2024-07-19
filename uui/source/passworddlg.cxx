@@ -76,7 +76,7 @@ PasswordDialog::PasswordDialog(weld::Window* pParent,
 
     m_xDialog->set_title(aTitle);
 
-    TranslateId pStrId = bOpenToModify ? STR_ENTER_PASSWORD_TO_MODIFY : STR_ENTER_PASSWORD_TO_OPEN;
+    TranslateId pStrId = bOpenToModify ? STR_ENTER_PASSWORD_TO_MODIFY : STR_ENTER_PASSWORD_TO_OPEN;  // tdf#161909: "Enter password to open file: \n" doesn't fit well for NSS.
     OUString aMessage(Translate::get(pStrId, rResLocale));
     INetURLObject url(aDocURL);
 
@@ -85,7 +85,7 @@ PasswordDialog::PasswordDialog(weld::Window* pParent,
                                      INetURLObject::DecodeMechanism::Unambiguous);
     if (!aFileName.isEmpty())
         aFileName += " - " + utl::ConfigManager::getProductName();
-    m_xDialog->set_title(aTitle + " - " + aFileName);
+    m_xDialog->set_title(aTitle + " - " + aFileName);  // aFileName is empty for NSS
 
     aMessage += url.HasError()
         ? aDocURL : url.GetMainURL(INetURLObject::DecodeMechanism::Unambiguous);
