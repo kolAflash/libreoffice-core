@@ -233,7 +233,7 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="sign">
-                    <property name="label" translatable="yes" context="digitalsignaturesdialog|sign">Sign Document...</property>
+                    <property name="label" translatable="yes" context="digitalsignaturesdialog|sign">Sign Document (GPG / X.509)...</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="can-default">True</property>
