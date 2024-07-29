@@ -43,6 +43,10 @@ gb_TEST_ENV_VARS += LIBO_LANG=C
 
 # GNUPGHOME is needed for tests using the LibreOffice GPG features.
 gb_TEST_ENV_VARS += GNUPGHOME="$(SRCDIR)/test/signing-keys"
+# TODO tdf-gerrit#167904 cp to workdir, use workdir-sub-path
+#   -> ask Michael
+#   see unotest/source/cpp/macros_test.cxx line 148
+#   https://git.libreoffice.org/core/+/2816ac4ad01874203efdbf9961ca2c22cbd94a3c%5E!
 
 .PHONY : $(call gb_UITest_get_clean_target,%)
 $(call gb_UITest_get_clean_target,%) :
