@@ -602,7 +602,10 @@ OUString DocPasswordHelper::GetOoxHashAsBase64(
         PasswordRequestMode eRequestMode = PasswordRequestMode_PASSWORD_ENTER;
         while( eResult == DocPasswordVerifierResult::WrongPassword )
         {
-            rtl::Reference<DocPasswordRequest> pRequest = new DocPasswordRequest( eRequestType, eRequestMode, rDocumentUrl );
+            // tdf#161909: TODO: in rDocumentUrl _ needs to be escaped as __ (two underscores) for VCL=gtk3, but not for the other UIs.
+            // "<" and ">" are already escaped as %3C and %3E at this point.
+            const OUString& rDocumentUrl_e = rDocumentUrl + " 1:%3C 2:%95 3:__";
+            rtl::Reference<DocPasswordRequest> pRequest = new DocPasswordRequest( eRequestType, eRequestMode, rDocumentUrl_e );
             rxInteractHandler->handle( pRequest );
             if( pRequest->isPassword() )
             {

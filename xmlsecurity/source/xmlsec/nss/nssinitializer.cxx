@@ -171,7 +171,7 @@ bool lcl_pathExists(const OUString& sPath)
 const OUString & ONSSInitializer::getMozillaCurrentProfile(const css::uno::Reference< css::uno::XComponentContext > &rxContext, bool bSetActive)
 {
     if (m_bIsNSSinitialized)
-         return m_sNSSPath;
+         return m_sNSSPath;  // tdf#161909 returns the previously found path
     if (bSetActive)
         m_bIsNSSinitialized = true;
 
@@ -189,7 +189,7 @@ const OUString & ONSSInitializer::getMozillaCurrentProfile(const css::uno::Refer
     if (m_sNSSPath.isEmpty())
     {
         try
-        {
+        {  // tdf#161909 - 6: finds NSS db files path: cert9.db, key4.db
             OUString sUserSetCertPath =
                 officecfg::Office::Common::Security::Scripting::CertDir::get().value_or(OUString());
 
@@ -345,9 +345,9 @@ bool nsscrypto_initialize(css::uno::Reference<css::uno::XComponentContext> const
     OString sCertDir;
 
 #ifdef XMLSEC_CRYPTO_NSS
-    sCertDir = OUStringToOString(ONSSInitializer::getMozillaCurrentProfile(rxContext, true), osl_getThreadTextEncoding());
+    sCertDir = OUStringToOString(ONSSInitializer::getMozillaCurrentProfile(rxContext, true), osl_getThreadTextEncoding());  // tdf#161909 probably UNIX/Linux
 #else
-    (void) rxContext;
+    (void) rxContext;  // tdf#161909 probably Windows
 #endif
     SAL_INFO("xmlsecurity.xmlsec",  "Using profile: " << sCertDir );
 
@@ -371,7 +371,7 @@ bool nsscrypto_initialize(css::uno::Reference<css::uno::XComponentContext> const
                 sCertDir = "dbm:" + sCertDir;
             }
         }
-        if (NSS_InitReadWrite(sCertDir.getStr()) != SECSuccess)
+        if (NSS_InitReadWrite(sCertDir.getStr()) != SECSuccess)  // tdf#161909 - 5: opens NSS db files: cert9.db, key4.db
         {
             SAL_INFO("xmlsecurity.xmlsec", "Initializing NSS with profile failed.");
             int errlen = PR_GetErrorTextLength();
@@ -527,7 +527,7 @@ ONSSInitializer::~ONSSInitializer()
 
 bool ONSSInitializer::initNSS( const css::uno::Reference< css::uno::XComponentContext > &rxContext )
 {
-    static bool gbInitialized = [&rxContext]()
+    static bool gbInitialized = [&rxContext]()  // tdf#161909 - 4: opens NSS db files: cert9.db, key4.db
         {
             bool bNSSInit = false;
             bool bInitialized = nsscrypto_initialize( rxContext, bNSSInit );

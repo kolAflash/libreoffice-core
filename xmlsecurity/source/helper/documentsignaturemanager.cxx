@@ -84,7 +84,7 @@ bool DocumentSignatureManager::init()
 #endif
 
     if (mxSEInitializer.is())
-        mxSecurityContext = mxSEInitializer->createSecurityContext(OUString());
+        mxSecurityContext = mxSEInitializer->createSecurityContext(OUString());  // tdf#161909 - 2: opens NSS db files: cert9.db, key4.db
 
 #if HAVE_FEATURE_GPGME
     if (mxGpgSEInitializer.is())

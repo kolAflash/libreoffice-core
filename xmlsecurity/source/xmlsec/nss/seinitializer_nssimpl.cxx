@@ -46,7 +46,7 @@ uno::Reference< css::xml::crypto::XXMLSecurityContext > SAL_CALL
 {
     CERTCertDBHandle    *pCertHandle = nullptr ;
 
-    if( !initNSS( m_xContext ) )
+    if( !initNSS( m_xContext ) )  // tdf#161909 - 3: opens NSS db files: cert9.db, key4.db
         return nullptr;
 
     pCertHandle = CERT_GetDefaultCertDB() ;

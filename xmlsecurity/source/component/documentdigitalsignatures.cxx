@@ -697,7 +697,7 @@ DocumentDigitalSignatures::chooseCertificatesImpl(std::map<OUString, OUString>& 
     std::vector< Reference< css::xml::crypto::XXMLSecurityContext > > xSecContexts;
 
     DocumentSignatureManager aSignatureManager(mxCtx, {});
-    if (aSignatureManager.init()) {
+    if (aSignatureManager.init()) {  // tdf#161909 - 1: opens NSS db files: cert9.db, key4.db
         xSecContexts.push_back(aSignatureManager.getSecurityContext());
         // Don't include OpenPGP if only X.509 certs are requested  // TODO tdf#115884
         if (certificateKind == CertificateKind_NONE || certificateKind == CertificateKind_OPENPGP)

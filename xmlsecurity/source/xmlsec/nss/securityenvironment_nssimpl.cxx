@@ -52,6 +52,7 @@
 #include <com/sun/star/security/NoPasswordException.hpp>
 #include <com/sun/star/security/CertificateCharacters.hpp>
 #include <com/sun/star/security/CertificateValidity.hpp>
+#include <com/sun/star/xml/crypto/NSSInitializer.hpp>  // tdf#161909 - maybe not needed
 
 namespace csss = ::com::sun::star::security;
 using namespace ::com::sun::star::security;
@@ -97,10 +98,17 @@ static char* GetPasswordFunction( PK11SlotInfo* pSlot, PRBool bRetry, void* /*ar
     uno::Reference< uno::XComponentContext > xContext( ::comphelper::getProcessComponentContext() );
     uno::Reference < task::XInteractionHandler2 > xInteractionHandler(
         task::InteractionHandler::createWithParent(xContext, nullptr) );
-
+    // tdf#161909 creates the NSS Passwort request
     task::PasswordRequestMode eMode = bRetry ? task::PasswordRequestMode_PASSWORD_REENTER : task::PasswordRequestMode_PASSWORD_ENTER;
+    uno::Reference<xml::crypto::XNSSInitializer> xCipherContextSupplier = xml::crypto::NSSInitializer::create(xContext);
+    auto bar = xCipherContextSupplier->getNSSPath();
+    SAL_INFO("", bar);
+    (void)pSlot;  // unused
+    auto nssPath = xml::crypto::NSSInitializer::create(xContext)->getNSSPath();
     rtl::Reference<::comphelper::DocPasswordRequest> pPasswordRequest = new ::comphelper::DocPasswordRequest(
-        ::comphelper::DocPasswordRequestType::Standard, eMode, OUString::createFromAscii(PK11_GetTokenName(pSlot)) );
+        ::comphelper::DocPasswordRequestType::Standard, eMode, nssPath);
+    //rtl::Reference<::comphelper::DocPasswordRequest> pPasswordRequest = new ::comphelper::DocPasswordRequest(
+    //    ::comphelper::DocPasswordRequestType::Standard, eMode, OUString::createFromAscii(PK11_GetTokenName(pSlot)) );  // tdf#161909 - PK11_GetTokenName(pSlot) => NSS Certificate DB
 
     xInteractionHandler->handle( pPasswordRequest );
 

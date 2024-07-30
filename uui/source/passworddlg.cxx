@@ -32,7 +32,9 @@ using namespace ::com::sun::star;
 PasswordDialog::PasswordDialog(weld::Window* pParent,
     task::PasswordRequestMode nDialogMode, const std::locale& rResLocale,
     const OUString& aDocURL, bool bOpenToModify, bool bIsSimplePasswordRequest)
-    : GenericDialogController(pParent, u"uui/ui/password.ui"_ustr, u"PasswordDialog"_ustr)
+    : GenericDialogController(pParent, u"uui/ui/password.ui"_ustr, u"PasswordDialog"_ustr)  // tdf#161909: opens uui/uiconfig/ui/password.ui -> uiconfig!?
+                                                                                            // -> that's the path for the .ui files in the installation
+                                                                                            //    (should be instdir/share/config/soffice.cfg/uui/ui/password.ui in the build dir)
     , m_xFTPassword(m_xBuilder->weld_label(u"newpassFT"_ustr))
     , m_xEDPassword(m_xBuilder->weld_entry(u"newpassEntry"_ustr))
     , m_xFTConfirmPassword(m_xBuilder->weld_label(u"confirmpassFT"_ustr))
@@ -85,10 +87,12 @@ PasswordDialog::PasswordDialog(weld::Window* pParent,
                                      INetURLObject::DecodeMechanism::Unambiguous);
     if (!aFileName.isEmpty())
         aFileName += " - " + utl::ConfigManager::getProductName();
-    m_xDialog->set_title(aTitle + " - " + aFileName);  // aFileName is empty for NSS
+    m_xDialog->set_title(aTitle + " - " + aFileName);  // tdf#161909 - aFileName is empty for NSS
 
+    // tdf#161909: INetURLObject::GetMainURL seems to convert %3C into "<" for all VCL UIs.
+    auto foo = url.GetMainURL(INetURLObject::DecodeMechanism::Unambiguous);
     aMessage += url.HasError()
-        ? aDocURL : url.GetMainURL(INetURLObject::DecodeMechanism::Unambiguous);
+        ? aDocURL : foo;
     m_xFTPassword->set_label(aMessage);
 
     if (bIsSimplePasswordRequest)
