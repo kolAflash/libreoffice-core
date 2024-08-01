@@ -23,11 +23,13 @@
 #include <com/sun/star/xml/crypto/XSecurityEnvironment.hpp>
 #include <com/sun/star/xml/crypto/XXMLSecurityContext.hpp>
 #include <com/sun/star/xml/crypto/XXMLSecurityContextInfo.hpp>
+#include <comphelper/processfactory.hxx>  // tdf#161909 - maybe not needed
 #include <comphelper/sequence.hxx>
 #include <comphelper/xmlsechelper.hxx>
 
 #include <com/sun/star/security/NoPasswordException.hpp>
 #include <com/sun/star/security/CertificateCharacters.hpp>
+#include <com/sun/star/xml/crypto/NSSInitializer.hpp>  // tdf#161909 - maybe not needed
 
 #include <unotools/datetime.hxx>
 #include <unotools/charclass.hxx>
@@ -46,6 +48,7 @@ CertificateChooser::CertificateChooser(weld::Window* _pParent,
     , meAction(eAction)
     , m_xFTSign(m_xBuilder->weld_label(u"sign"_ustr))
     , m_xFTEncrypt(m_xBuilder->weld_label(u"encrypt"_ustr))
+    , m_xFTLoadedCerts(m_xBuilder->weld_label(u"loaded-certs"_ustr))
     , m_xCertLB(m_xBuilder->weld_tree_view(u"signatures"_ustr))
     , m_xViewBtn(m_xBuilder->weld_button(u"viewcert"_ustr))
     , m_xOKBtn(m_xBuilder->weld_button(u"ok"_ustr))
@@ -177,6 +180,9 @@ void CertificateChooser::ImplInitialize(bool mbSearch)
 
     }
 
+    uno::Reference< uno::XComponentContext > xContext( ::comphelper::getProcessComponentContext() );
+    auto nssPath = xml::crypto::NSSInitializer::create(xContext)->getNSSPath();
+
     ::std::optional<int> oSelectRow;
     uno::Sequence<uno::Reference< security::XCertificate>> xCerts;
     for (auto& secContext : mxSecurityContexts)
@@ -204,9 +210,13 @@ void CertificateChooser::ImplInitialize(bool mbSearch)
                 if (meAction == CertificateChooserUserAction::Sign || meAction == CertificateChooserUserAction::SelectSign)
                     xCerts = secEnvironment->getPersonalCertificates();
                 else
+                {
                     // X.509 implementations (nss+mscrypt) give an empty result. tdf#115884 tdf#161909
                     // Only because of this mess "Encrypt with GPG" correct shows only GPG keys.
                     xCerts = secEnvironment->getAllCertificates();
+                    if (xCerts.getLength() > 0)
+                        m_xFTLoadedCerts->set_label(XsResId(STR_LOADED_CERTS_CUSTOM) + " X.509 certificates are loaded from the Mozilla profile at: " + nssPath);
+                }
 
                 for (sal_Int32 nCert = xCerts.getLength(); nCert;)
                 {

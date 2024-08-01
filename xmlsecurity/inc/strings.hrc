@@ -62,6 +62,7 @@
 #define STR_SIGN                                    NC_("selectcertificatedialog|str_sign", "Sign")
 #define STR_SELECTSIGN                              NC_("selectcertificatedialog|str_selectsign", "Select")
 #define STR_ENCRYPT                                 NC_("selectcertificatedialog|str_encrypt", "Encrypt")
+#define STR_LOADED_CERTS_CUSTOM                     NC_("selectcertificatedialog|str_encrypt", "Depending on the use case this list may only contain GPG or X.509 certificates or both. GPG keys are loaded from the GPG program.")
 
 #define STR_BROKEN_MACRO_CERTIFICATE_DATA           NC_("STR_BROKEN_MACRO_CERTIFICATE_DATA", "Macro security problem!\n\nBroken certificate data: %{data}")
 #define STR_RELOAD_FILE_WARNING                     NC_("STR_RELOAD_FILE_WARNING", "Reload the file to apply the new macro security level")
