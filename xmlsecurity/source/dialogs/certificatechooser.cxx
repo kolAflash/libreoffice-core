@@ -179,9 +179,17 @@ void CertificateChooser::ImplInitialize(bool mbSearch)
             break;
 
     }
+    //m_xFTLoadedCerts->show();  // Contains general information in any case.  // tdf#161909 - probably not needed
 
-    uno::Reference< uno::XComponentContext > xContext( ::comphelper::getProcessComponentContext() );
-    auto nssPath = xml::crypto::NSSInitializer::create(xContext)->getNSSPath();
+    bool actionSign = meAction == CertificateChooserUserAction::Sign || meAction == CertificateChooserUserAction::SelectSign;
+    //if (actionSign)
+    //{
+    //    uno::Reference< uno::XComponentContext > xContext( ::comphelper::getProcessComponentContext() );
+    //    auto nssPath = xml::crypto::NSSInitializer::create(xContext)->getNSSPath();
+    //    // tdf#161909 - TODO does string concatenation work for translations?
+    //    // tdf#161909 - only show Mozilla when NSS is used (not Windows)
+    //    m_xFTLoadedCerts->set_label(XsResId(STR_LOADED_CERTS_CUSTOM) + " X.509 certificates are loaded from the Mozilla profile at: " + nssPath);
+    //}
 
     ::std::optional<int> oSelectRow;
     uno::Sequence<uno::Reference< security::XCertificate>> xCerts;
@@ -207,16 +215,12 @@ void CertificateChooser::ImplInitialize(bool mbSearch)
             }
             else
             {
-                if (meAction == CertificateChooserUserAction::Sign || meAction == CertificateChooserUserAction::SelectSign)
+                if (actionSign)
                     xCerts = secEnvironment->getPersonalCertificates();
                 else
-                {
                     // X.509 implementations (nss+mscrypt) give an empty result. tdf#115884 tdf#161909
                     // Only because of this mess "Encrypt with GPG" correct shows only GPG keys.
                     xCerts = secEnvironment->getAllCertificates();
-                    if (xCerts.getLength() > 0)
-                        m_xFTLoadedCerts->set_label(XsResId(STR_LOADED_CERTS_CUSTOM) + " X.509 certificates are loaded from the Mozilla profile at: " + nssPath);
-                }
 
                 for (sal_Int32 nCert = xCerts.getLength(); nCert;)
                 {

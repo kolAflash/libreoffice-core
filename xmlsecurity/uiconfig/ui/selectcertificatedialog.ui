@@ -90,23 +90,58 @@
           <object class="GtkBox" id="box1">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
+            <property name="hexpand">False</property>
+            <property name="vexpand">False</property>
             <property name="orientation">vertical</property>
+            <!--<property name="spacing">1</property>-->
             <property name="spacing">12</property>
+            <child>
+              <object class="GtkLabel" id="loaded-certs">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="double-buffered">False</property>
+                <!--<property name="valign">baseline</property>-->
+                <property name="margin-start">2</property>
+                <property name="margin-end">2</property>
+                <property name="margin-top">1</property>
+                <property name="margin-bottom">1</property>
+                <property name="hexpand">False</property>
+                <property name="vexpand">False</property>
+                <property name="ypad">0</property>
+                <property name="label" translatable="yes" context="selectcertificatedialog|loaded-certs">Depending on the use case this list may only contain GPG or X.509 certificates or both. GPG keys are loaded from the GPG program. X.509 keys are either loaded from your operating systems key storage or from the Mozilla application (e.g. Thunderbird) profile selected in the LibreOffice options.</property>
+                <property name="wrap">True</property>
+                <!--<property name="width-chars">56</property>-->
+                <property name="max-width-chars">56</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkLabel" id="sign">
                 <property name="can-focus">False</property>
+                <property name="double-buffered">False</property>
+                <!--<property name="valign">baseline</property>-->
+                <property name="margin-start">2</property>
+                <property name="margin-end">2</property>
+                <property name="margin-top">1</property>
+                <property name="margin-bottom">1</property>
+                <property name="ypad">0</property>
                 <property name="label" translatable="yes" context="selectcertificatedialog|sign">Select the certificate you want to use for signing.</property>
                 <property name="wrap">True</property>
                 <property name="width-chars">56</property>
                 <property name="max-width-chars">56</property>
                 <property name="xalign">0</property>
+                <property name="yalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -120,21 +155,6 @@
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="loaded-certs">
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes" context="selectcertificatedialog|loaded-certs">Depending on the use case this list may only contain GPG or X.509 certificates or both. GPG keys are loaded from the GPG program. X.509 keys are either loaded from your operating systems key storage or from the Mozilla application (e.g. Thunderbird) profile selected in the LibreOffice options.</property>
-                <property name="wrap">True</property>
-                <property name="width-chars">56</property>
-                <property name="max-width-chars">56</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-              <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">2</property>
               </packing>
@@ -162,7 +182,7 @@
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn3">
                         <property name="resizable">True</property>
-                        <property name="spacing">6</property>
+                        <property name="spacing">1</property>
                         <property name="title" translatable="yes" context="selectcertificatedialog|issuedto">Issued to</property>
                         <property name="sort-indicator">True</property>
                         <property name="sort-column-id">0</property>
@@ -245,7 +265,7 @@
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="position">3</property>
               </packing>
             </child>
             <child>
@@ -264,7 +284,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">3</property>
+                <property name="position">4</property>
               </packing>
             </child>
             <child>
@@ -306,7 +326,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">4</property>
+                <property name="position">5</property>
               </packing>
             </child>
             <child>
@@ -357,7 +377,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">5</property>
+                <property name="position">6</property>
               </packing>
             </child>
           </object>
