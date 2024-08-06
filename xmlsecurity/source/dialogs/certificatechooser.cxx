@@ -20,6 +20,7 @@
 #include <config_gpgme.h>
 #include <certificatechooser.hxx>
 #include <certificateviewer.hxx>
+#include <com/sun/star/lang/XServiceInfo.hpp>
 #include <com/sun/star/xml/crypto/XSecurityEnvironment.hpp>
 #include <com/sun/star/xml/crypto/XXMLSecurityContext.hpp>
 #include <com/sun/star/xml/crypto/XXMLSecurityContextInfo.hpp>
@@ -181,28 +182,29 @@ void CertificateChooser::ImplInitialize(bool mbSearch)
     }
 
     bool actionSign = meAction == CertificateChooserUserAction::Sign || meAction == CertificateChooserUserAction::SelectSign;
-    if (actionSign)
-    {
-        OUString baseLabel = XsResId(STR_LOADED_CERTS_X509_NEWLINE);
-        if (mxSecurityContexts.size() >= 2)
-            baseLabel = XsResId(STR_LOADED_CERTS_GPG_X509_NEWLINE);
-        uno::Reference< uno::XComponentContext > xContext( ::comphelper::getProcessComponentContext() );
-        auto nssPath = xml::crypto::NSSInitializer::create(xContext)->getNSSPath();
-        if (!nssPath.isEmpty())  // tdf#161909 - only show when NSS is used (not on Windows)
-            m_xFTLoadedCerts->set_label(baseLabel + nssPath);
-    }
-    else m_xFTLoadedCerts->set_label(XsResId(STR_LOADED_CERTS_GPG));
-
+    bool has_gpg = false;
+    bool has_x509_mscrypt = false;
+    bool has_x509_nss = false;
     ::std::optional<int> oSelectRow;
     uno::Sequence<uno::Reference< security::XCertificate>> xCerts;
     for (auto& secContext : mxSecurityContexts)
     {
-        auto foo = css::uno::Reference<css::xml::crypto::XXMLSecurityContextInfo>
+        // tdf#161909
+        auto foo_a = css::uno::Reference<css::xml::crypto::XXMLSecurityContextInfo>
                 (secContext, css::uno::UNO_QUERY);
-        if (foo.is()) {
-            sal_Int32 bar = foo->getImplNo();
-            SAL_DEBUG(bar);
+        if (foo_a.is()) {
+            sal_Int32 bar_a = foo_a->getImplNo();
+            SAL_DEBUG(bar_a);
         }
+        auto foo_b = css::uno::Reference<css::lang::XServiceInfo>
+                (secContext, css::uno::UNO_QUERY);
+        if (foo_b.is()) {
+            OUString bar_b = foo_b->getImplementationName();
+            SAL_DEBUG(bar_b);
+            // TODO: tdf#161909 has_gpg has_x509_mscrypt has_x509_nss
+        }
+        // tdf#161909
+
         if (!secContext.is())
             continue;
         auto secEnvironment = secContext->getSecurityEnvironment();
@@ -241,6 +243,19 @@ void CertificateChooser::ImplInitialize(bool mbSearch)
         catch (security::NoPasswordException&)
         {
         }
+
+        if (actionSign)
+        {
+            OUString baseLabel = XsResId(STR_LOADED_CERTS_X509_NEWLINE);
+            //if (has_gpg)
+            if (mxSecurityContexts.size() >= 2)
+                baseLabel = XsResId(STR_LOADED_CERTS_GPG_X509_NEWLINE);
+            uno::Reference< uno::XComponentContext > xContext( ::comphelper::getProcessComponentContext() );
+            auto nssPath = xml::crypto::NSSInitializer::create(xContext)->getNSSPath();
+            if (!nssPath.isEmpty())  // tdf#161909 - only show when NSS is used (not on Windows)
+                m_xFTLoadedCerts->set_label(baseLabel + nssPath);
+        }
+        else m_xFTLoadedCerts->set_label(XsResId(STR_LOADED_CERTS_GPG));
 
         // fill list of certificates; the first entry will be selected
         for (const auto& xCert : xCerts)
