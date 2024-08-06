@@ -33,7 +33,7 @@ PasswordDialog::PasswordDialog(weld::Window* pParent,
     task::PasswordRequestMode nDialogMode, const std::locale& rResLocale,
     const OUString& aDocURL, bool bOpenToModify, bool bIsSimplePasswordRequest)
     : GenericDialogController(pParent, u"uui/ui/password.ui"_ustr, u"PasswordDialog"_ustr)
-    , m_xFTPassword(m_xBuilder->weld_label(u"newpassNoMnemonicFT"_ustr))  // used for external strings with underlines (e.g. filenames)
+    , m_xFTPassword(m_xBuilder->weld_label(u"newpassFT"_ustr))
     , m_xEDPassword(m_xBuilder->weld_entry(u"newpassEntry"_ustr))
     , m_xFTConfirmPassword(m_xBuilder->weld_label(u"confirmpassFT"_ustr))
     , m_xEDConfirmPassword(m_xBuilder->weld_entry(u"confirmpassEntry"_ustr))
