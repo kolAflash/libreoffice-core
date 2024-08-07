@@ -189,11 +189,12 @@ void CertificateChooser::ImplInitialize(bool mbSearch)
     uno::Sequence<uno::Reference< security::XCertificate>> xCerts;
     for (auto& secContext : mxSecurityContexts)
     {
+        SAL_DEBUG("bar_afoooooooooooo");
         // tdf#161909
         auto foo_a = css::uno::Reference<css::xml::crypto::XXMLSecurityContextInfo>
                 (secContext, css::uno::UNO_QUERY);
         if (foo_a.is()) {
-            sal_Int32 bar_a = foo_a->getImplNo();
+            sal_Int32 bar_a = foo_a->getImplNo();  // 1, 2 or 3
             SAL_DEBUG(bar_a);
         }
         auto foo_b = css::uno::Reference<css::lang::XServiceInfo>

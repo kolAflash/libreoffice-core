@@ -699,6 +699,7 @@ DocumentDigitalSignatures::chooseCertificatesImpl(std::map<OUString, OUString>& 
     DocumentSignatureManager aSignatureManager(mxCtx, {});
     if (aSignatureManager.init()) {
         // Include OpenPGP and / or X.509 as requested.
+        //SAL_DEBUG(certificateKind);
         if (certificateKind == CertificateKind_NONE || certificateKind == CertificateKind_X509)
             xSecContexts.push_back(aSignatureManager.getSecurityContext());
         if (certificateKind == CertificateKind_NONE || certificateKind == CertificateKind_OPENPGP)
