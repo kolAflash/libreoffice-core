@@ -138,7 +138,7 @@ sal_Int32 SAL_CALL XMLSecurityContext_NssImpl::getImplNo()
 
 /* XServiceInfo */
 OUString SAL_CALL XMLSecurityContext_NssImpl::getImplementationName() {
-    return u"com.sun.star.xml.crypto.XMLSecurityContext"_ustr;
+    return u"com.sun.star.xml.crypto.XMLSecurityContext_NssImpl"_ustr;
 }
 
 /* XServiceInfo */

@@ -202,8 +202,10 @@ void CertificateChooser::ImplInitialize(bool mbSearch)
         OUString secContextType = secContextServiceInfo->getImplementationName();
         SAL_DEBUG(secContextType);
         // TODO: tdf#161909 has_gpg has_x509_mscrypt has_x509_nss
-        if (secContextType == "com.sun.star.xml.crypto.XMLSecurityContext") has_x509_nss = true;
-        else if (secContextType == "mscrypt") has_x509_mscrypt = true;
+        // TODO: PROBLEM: is Windows and NSS: com.sun.star.xml.crypto.XMLSecurityContext
+        //                workaround: check if running on Windows (Windows never uses the NSS keystore)
+        if (secContextType == "com.sun.star.xml.crypto.XMLSecurityContext_NssImpl") has_x509_nss = true;  // actually XMLSecurityContext
+        else if (secContextType == "com.sun.star.xml.crypto.XMLSecurityContext_MSCryptImpl") has_x509_mscrypt = true;  // actually XMLSecurityContext
         else if (secContextType == "com.sun.star.xml.security.gpg.XMLSecurityContext_GpgImpl") has_gpg = true;
         //switch (secContextType) {
         //    case "nss":      // X.509 NSS (Mozilla)

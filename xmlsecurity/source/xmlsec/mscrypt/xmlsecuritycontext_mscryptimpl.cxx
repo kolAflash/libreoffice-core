@@ -139,7 +139,7 @@ sal_Int32 SAL_CALL XMLSecurityContext_MSCryptImpl::getImplNo()
 
 /* XServiceInfo */
 OUString SAL_CALL XMLSecurityContext_MSCryptImpl::getImplementationName() {
-    return "com.sun.star.xml.crypto.XMLSecurityContext" ;
+    return "com.sun.star.xml.crypto.XMLSecurityContext_MSCryptImpl" ;
 }
 
 /* XServiceInfo */
