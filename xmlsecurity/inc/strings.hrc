@@ -62,10 +62,6 @@
 #define STR_SIGN                                    NC_("selectcertificatedialog|str_sign", "Sign")
 #define STR_SELECTSIGN                              NC_("selectcertificatedialog|str_selectsign", "Select")
 #define STR_ENCRYPT                                 NC_("selectcertificatedialog|str_encrypt", "Encrypt")
-#define STR_LOADED_CERTS_GPG_X509_NEWLINE           NC_("selectcertificatedialog|str_encrypt", "This list may contain GPG keys and X.509 certificates. GPG keys are loaded from the GPG program. X.509 certificates are loaded from the Mozilla profile at:\n")
-#define STR_LOADED_CERTS_GPG                        NC_("selectcertificatedialog|str_encrypt", "This list contains GPG keys which are loaded from the GPG program.")
-#define STR_LOADED_CERTS_X509_NEWLINE               NC_("selectcertificatedialog|str_encrypt", "This list contains X.509 certificates which are loaded from the Mozilla profile at:\n")
-// TODO use %{foobar}
 
 #define STR_BROKEN_MACRO_CERTIFICATE_DATA           NC_("STR_BROKEN_MACRO_CERTIFICATE_DATA", "Macro security problem!\n\nBroken certificate data: %{data}")
 #define STR_RELOAD_FILE_WARNING                     NC_("STR_RELOAD_FILE_WARNING", "Reload the file to apply the new macro security level")

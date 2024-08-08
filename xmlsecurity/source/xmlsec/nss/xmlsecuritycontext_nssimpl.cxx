@@ -23,7 +23,6 @@
 #include <cppuhelper/supportsservice.hxx>
 #include <com/sun/star/lang/XServiceInfo.hpp>
 #include <com/sun/star/xml/crypto/XXMLSecurityContext.hpp>
-#include <com/sun/star/xml/crypto/XXMLSecurityContextInfo.hpp>
 #include <o3tl/safeint.hxx>
 
 namespace com::sun::star::uno { class XComponentContext; }
@@ -36,10 +35,8 @@ using ::com::sun::star::xml::crypto::XXMLSecurityContext ;
 
 namespace {
 
-class XMLSecurityContext_NssImpl : public ::cppu::WeakImplHelper<
-    css::xml::crypto::XXMLSecurityContextInfo,
-    xml::crypto::XXMLSecurityContext,
-    lang::XServiceInfo>
+class XMLSecurityContext_NssImpl
+    : public ::cppu::WeakImplHelper<xml::crypto::XXMLSecurityContext, lang::XServiceInfo>
 {
 private:
     std::vector<uno::Reference<xml::crypto::XSecurityEnvironment>> m_vSecurityEnvironments;
@@ -64,9 +61,6 @@ public:
     virtual ::sal_Int32 SAL_CALL getDefaultSecurityEnvironmentIndex() override;
 
     virtual void SAL_CALL setDefaultSecurityEnvironmentIndex(sal_Int32 nDefaultEnvIndex) override;
-
-    // XXMLSecurityContextInfo
-    virtual sal_Int32 SAL_CALL getImplNo() override;
 
     //XServiceInfo
     virtual OUString SAL_CALL getImplementationName() override;
@@ -131,14 +125,9 @@ void SAL_CALL XMLSecurityContext_NssImpl::setDefaultSecurityEnvironmentIndex( sa
     m_nDefaultEnvIndex = nDefaultEnvIndex;
 }
 
-sal_Int32 SAL_CALL XMLSecurityContext_NssImpl::getImplNo()
-{
-    return 1;
-}
-
 /* XServiceInfo */
 OUString SAL_CALL XMLSecurityContext_NssImpl::getImplementationName() {
-    return u"com.sun.star.xml.crypto.XMLSecurityContext_NssImpl"_ustr;
+    return u"com.sun.star.xml.crypto.XMLSecurityContext"_ustr;
 }
 
 /* XServiceInfo */
