@@ -10,6 +10,8 @@
 
 #pragma once
 
+#include <config_wasm_strip.h>
+
 #include <sal/config.h>
 #include <svx/svxdllapi.h>
 #include <editeng/editeng.hxx>
@@ -57,7 +59,9 @@ protected:
 
     virtual void makeEditEngine();
 
-    void InitAccessible();
+    #if !ENABLE_WASM_STRIP_ACCESSIBILITY
+        void InitAccessible();
+    #endif
 
     void DoPaint(vcl::RenderContext& rRenderContext, const tools::Rectangle& rRect);
 

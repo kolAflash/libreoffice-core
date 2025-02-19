@@ -43,6 +43,14 @@ $(eval $(call gb_Library_use_libraries,wpftimpress,\
 	xo \
 ))
 
+#$(eval $(call gb_Library_use_externals,wpftimpress,\
+#	boost_headers \
+#	$(if $(ENABLE_WASM_STRIP_SCEXPORTS),,etonyek) \
+#	mwaw \
+#	odfgen \
+#	staroffice \
+#	revenge \
+#))
 $(eval $(call gb_Library_use_externals,wpftimpress,\
 	boost_headers \
 	etonyek \

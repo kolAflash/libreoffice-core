@@ -1662,6 +1662,9 @@ else # !SYSTEM_ETONYEK
 
 ifeq ($(COM),MSC)
 
+#$(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo,\
+#	$(if $(ENABLE_WASM_STRIP_SCEXPORTS),,etonyek) \
+#))
 $(eval $(call gb_Helper_register_libraries_for_install,PLAINLIBS_OOO,ooo,\
 	etonyek \
 ))
