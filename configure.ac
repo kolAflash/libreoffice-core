@@ -2187,10 +2187,10 @@ AC_ARG_ENABLE(wasm-strip,
 ,)
 
 AC_ARG_WITH(main-module,
-    AS_HELP_STRING([--with-main-module=<writer/calc/impress>],
+    AS_HELP_STRING([--with-main-module=<writer/calc>],
         [Specify which main module to build for wasm.
         Default value is 'writer'.]),
-, [with_main_module=calc,impress,writer])
+, [with_main_module=calc,writer])
 
 if test "$_os" = Emscripten; then
     AC_ARG_ENABLE(emscripten-jspi,
@@ -3302,23 +3302,15 @@ if test "$enable_wasm_strip" = "yes"; then
     enable_xmlhelp=no
     enable_zxing=no
     test_libepubgen=no
-    ##test_libcdr=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    #test_libcdr=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
+    test_libcdr=no
     test_libcmis=no
-    ##test_libetonyek=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    ##test_libfreehand=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    ##test_libmspub=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    ##test_libpagemaker=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    ##test_libqxp=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    ##test_libvisio=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    ##test_libzmf=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    #test_libetonyek=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    #test_libfreehand=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    #test_libmspub=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    #test_libpagemaker=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    #test_libqxp=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    #test_libvisio=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    #test_libzmf=no  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
+    test_libetonyek=no
+    test_libfreehand=no
+    test_libmspub=no
+    test_libpagemaker=no
+    test_libqxp=no
+    test_libvisio=no
+    test_libzmf=no
     with_galleries=no
     with_gssapi=no
     with_templates=no
@@ -3328,12 +3320,8 @@ if test "$enable_wasm_strip" = "yes"; then
 
     AC_DEFINE(ENABLE_WASM_STRIP_ACCESSIBILITY)
     AC_DEFINE(ENABLE_WASM_STRIP_WRITER)
-    AC_DEFINE(ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS)  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-#    AC_DEFINE(ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS)  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
     AC_DEFINE(ENABLE_WASM_STRIP_CALC)
-    AC_DEFINE(ENABLE_WASM_STRIP_CANVAS)  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-#    AC_DEFINE(ENABLE_WASM_STRIP_CANVAS)  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    AC_DEFINE(ENABLE_WASM_STRIP_CHART)
+    AC_DEFINE(ENABLE_WASM_STRIP_CANVAS)
 #    AC_DEFINE(ENABLE_WASM_STRIP_CHART)
     AC_DEFINE(ENABLE_WASM_STRIP_DBACCESS)
     AC_DEFINE(ENABLE_WASM_STRIP_EPUB)
@@ -3346,8 +3334,8 @@ if test "$enable_wasm_strip" = "yes"; then
     AC_DEFINE(ENABLE_WASM_STRIP_RECENT)
     AC_DEFINE(ENABLE_WASM_STRIP_RECOVERYUI)
     AC_DEFINE(ENABLE_WASM_STRIP_SPLASH)
-    AC_DEFINE(ENABLE_WASM_STRIP_SWEXPORTS)  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-    AC_DEFINE(ENABLE_WASM_STRIP_SCEXPORTS)  # TODO: needed by ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
+    AC_DEFINE(ENABLE_WASM_STRIP_SWEXPORTS)
+    AC_DEFINE(ENABLE_WASM_STRIP_SCEXPORTS)
 fi
 
 # Whether to build "avmedia" functionality or not.
@@ -4215,22 +4203,14 @@ if test "$cross_compiling" = "yes"; then
         ENABLE_WASM_STRIP=TRUE
     fi
     if test "$_os" = "Emscripten"; then
-        #if test "$with_main_module" = ''; then
-        #    ENABLE_WASM_STRIP_CALC=TRUE
-        #    ENABLE_WASM_STRIP_WRITER=TRUE
-        #    ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS=TRUE
-        #elif test "$with_main_module" = "calc"; then
-        #    ENABLE_WASM_STRIP_WRITER=TRUE
-        #    ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS=TRUE
-        #elif test "$with_main_module" = "writer"; then
-        #    ENABLE_WASM_STRIP_CALC=TRUE
-        #    ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS=TRUE
-        #elif test "$with_main_module" = "impress"; then
-            # TODO: REMOVE COMMENT AND NEXT LINE - DEBUG for ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
-            ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS=FALSE
+        if test "$with_main_module" = ''; then
             ENABLE_WASM_STRIP_CALC=TRUE
             ENABLE_WASM_STRIP_WRITER=TRUE
-        #fi
+        elif test "$with_main_module" = "calc"; then
+            ENABLE_WASM_STRIP_WRITER=TRUE
+        elif test "$with_main_module" = "writer"; then
+            ENABLE_WASM_STRIP_CALC=TRUE
+        fi
     fi
 else
     CROSS_COMPILING=
@@ -4238,9 +4218,7 @@ else
 fi
 AC_SUBST(CROSS_COMPILING)
 AC_SUBST(ENABLE_WASM_STRIP)
-AC_SUBST(ENABLE_WASM_STRIP_ACCESSIBILITY)  # TODO ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
 AC_SUBST(ENABLE_WASM_STRIP_WRITER)
-AC_SUBST(ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS)  # TODO ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
 AC_SUBST(ENABLE_WASM_STRIP_CALC)
 
 if test "$enable_emscripten_jspi" = yes; then
