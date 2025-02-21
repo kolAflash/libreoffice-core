@@ -3324,19 +3324,19 @@ if test "$enable_wasm_strip" = "yes"; then
 #    AC_DEFINE(ENABLE_WASM_STRIP_CALC)  # TODO: doesn't make sense to always disable, not used in C++ code (also remove from config_wasm_strip.h.in)
 #    AC_DEFINE(ENABLE_WASM_STRIP_CANVAS)  # TODO: doesn't make sense to always disable, not used in C++ code (also remove from config_wasm_strip.h.in)
 #    AC_DEFINE(ENABLE_WASM_STRIP_CHART)  # TODO: not used in C++ code (also remove from config_wasm_strip.h.in)
-    AC_DEFINE(ENABLE_WASM_STRIP_DBACCESS)
-    AC_DEFINE(ENABLE_WASM_STRIP_EPUB)
+#    AC_DEFINE(ENABLE_WASM_STRIP_DBACCESS)  # TODO: not used in C++ code (also remove from config_wasm_strip.h.in)
+#    AC_DEFINE(ENABLE_WASM_STRIP_EPUB)  # TODO: not used in C++ code (also remove from config_wasm_strip.h.in)
     AC_DEFINE(ENABLE_WASM_STRIP_EXTRA)
-    AC_DEFINE(ENABLE_WASM_STRIP_GUESSLANG)
+#    AC_DEFINE(ENABLE_WASM_STRIP_GUESSLANG)  # TODO: not used in C++ code (also remove from config_wasm_strip.h.in)
 #    AC_DEFINE(ENABLE_WASM_STRIP_HUNSPELL)
-    AC_DEFINE(ENABLE_WASM_STRIP_LANGUAGETOOL)
+#    AC_DEFINE(ENABLE_WASM_STRIP_LANGUAGETOOL)  # TODO: not used in C++ code (NOT EXISTING in config_wasm_strip.h.in)
     AC_DEFINE(ENABLE_WASM_STRIP_PINGUSER)
     AC_DEFINE(ENABLE_WASM_STRIP_PREMULTIPLY)
     AC_DEFINE(ENABLE_WASM_STRIP_RECENT)
     AC_DEFINE(ENABLE_WASM_STRIP_RECOVERYUI)
     AC_DEFINE(ENABLE_WASM_STRIP_SPLASH)
-    AC_DEFINE(ENABLE_WASM_STRIP_SWEXPORTS)
-    AC_DEFINE(ENABLE_WASM_STRIP_SCEXPORTS)
+#    AC_DEFINE(ENABLE_WASM_STRIP_SWEXPORTS)  # TODO: not used in C++ code (also remove from config_wasm_strip.h.in)
+#    AC_DEFINE(ENABLE_WASM_STRIP_SCEXPORTS)  # TODO: not used in C++ code (also remove from config_wasm_strip.h.in)
 fi
 
 # Whether to build "avmedia" functionality or not.
@@ -4198,12 +4198,13 @@ if test "$build_cpu" != "$host_cpu" -o "$DISABLE_DYNLOADING" = TRUE; then
     fi
 fi
 
-if test "$cross_compiling" = "yes"; then
-    export CROSS_COMPILING=TRUE
+#if test "$cross_compiling" = "yes"; then
+#    export CROSS_COMPILING=TRUE
     if test "$enable_dynamic_loading" != yes -a "$enable_wasm_strip" = yes; then
         ENABLE_WASM_STRIP=TRUE
     fi
-    if test "$_os" = "Emscripten"; then
+#    if test "$_os" = "Emscripten"; then
+    if test "$enable_wasm_strip" = "yes"; then
         ENABLE_WASM_STRIP_ACCESSIBILITY=TRUE
         ENABLE_WASM_STRIP_CALC=TRUE
         ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS=TRUE
@@ -4229,10 +4230,10 @@ if test "$cross_compiling" = "yes"; then
             AC_DEFINE(ENABLE_WASM_STRIP_ACCESSIBILITY)
         fi
     fi
-else
+#else
     CROSS_COMPILING=
     BUILD_TYPE="$BUILD_TYPE NATIVE"
-fi
+#fi
 AC_SUBST(CROSS_COMPILING)
 AC_SUBST(ENABLE_WASM_STRIP)
 AC_SUBST(ENABLE_WASM_STRIP_WRITER)
