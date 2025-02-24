@@ -4200,9 +4200,9 @@ fi
 
 #if test "$cross_compiling" = "yes"; then
 #    export CROSS_COMPILING=TRUE
-    if test "$enable_dynamic_loading" != yes -a "$enable_wasm_strip" = yes; then
+#    if test "$enable_dynamic_loading" != yes -a "$enable_wasm_strip" = yes; then
         ENABLE_WASM_STRIP=TRUE
-    fi
+#    fi
 #    if test "$_os" = "Emscripten"; then
     if test "$enable_wasm_strip" = "yes"; then
         ENABLE_WASM_STRIP_ACCESSIBILITY=TRUE
