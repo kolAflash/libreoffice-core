@@ -4198,13 +4198,13 @@ if test "$build_cpu" != "$host_cpu" -o "$DISABLE_DYNLOADING" = TRUE; then
     fi
 fi
 
-#if test "$cross_compiling" = "yes"; then
-#    export CROSS_COMPILING=TRUE
+if test "$cross_compiling" = "yes"; then
+    export CROSS_COMPILING=TRUE
     if test "$enable_dynamic_loading" != yes -a "$enable_wasm_strip" = yes; then
         ENABLE_WASM_STRIP=TRUE
     fi
-#    if test "$_os" = "Emscripten"; then
-    if test "$enable_wasm_strip" = "yes"; then
+    if test "$_os" = "Emscripten"; then
+#    if test "$enable_wasm_strip" = "yes"; then
         ENABLE_WASM_STRIP_ACCESSIBILITY=TRUE
         ENABLE_WASM_STRIP_CALC=TRUE
         ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS=TRUE
@@ -4230,10 +4230,10 @@ fi
             AC_DEFINE(ENABLE_WASM_STRIP_ACCESSIBILITY)
         fi
     fi
-#else
+else
     CROSS_COMPILING=
     BUILD_TYPE="$BUILD_TYPE NATIVE"
-#fi
+fi
 AC_SUBST(CROSS_COMPILING)
 AC_SUBST(ENABLE_WASM_STRIP)
 AC_SUBST(ENABLE_WASM_STRIP_WRITER)
