@@ -1128,6 +1128,13 @@ gb_emscripten_fs_image_files += \
     $(INSTROOT)/$(LIBO_SHARE_FOLDER)/config/soffice.cfg/modules/smath/ui/smathsettings.ui \
     $(INSTROOT)/$(LIBO_SHARE_FOLDER)/config/soffice.cfg/modules/smath/menubar/menubar.xml \
     $(INSTROOT)/$(LIBO_SHARE_FOLDER)/config/soffice.cfg/modules/smath/statusbar/statusbar.xml \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/themes/Beach.theme \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/themes/Breeze.theme \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/themes/Forest.theme \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/themes/Libreoffice.theme \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/themes/Ocean.theme \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/themes/Rainbow.theme \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/themes/Sunset.theme \
 
 endif # !ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
 
@@ -1811,5 +1818,7 @@ $(emscripten_fs_image_WORKDIR)/soffice.data.js.metadata: $(emscripten_fs_image_W
 	cd $(BUILDDIR) && \
 	$(EMSDK_FILE_PACKAGER) $(emscripten_fs_image_WORKDIR)/soffice.data --preload $(shell cat $^) --js-output=$(emscripten_fs_image_WORKDIR)/soffice.data.js --separate-metadata \
 	    || rm -f $(emscripten_fs_image_WORKDIR)/soffice.data.js $(emscripten_fs_image_WORKDIR)/soffice.data $(emscripten_fs_image_WORKDIR)/soffice.data.js.metadata
+
+# TODO: brotli compression can probably be added here
 
 # vim: set noet sw=4:
