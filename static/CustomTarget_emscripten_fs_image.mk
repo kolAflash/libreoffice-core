@@ -1135,6 +1135,12 @@ gb_emscripten_fs_image_files += \
     $(INSTROOT)/$(LIBO_SHARE_FOLDER)/themes/Ocean.theme \
     $(INSTROOT)/$(LIBO_SHARE_FOLDER)/themes/Rainbow.theme \
     $(INSTROOT)/$(LIBO_SHARE_FOLDER)/themes/Sunset.theme \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/config/soffice.cfg/simpress/effects.xml \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/config/soffice.cfg/simpress/layoutlist.xml \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/config/soffice.cfg/simpress/objectlist.xml \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/config/soffice.cfg/simpress/styles.xml \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/config/soffice.cfg/simpress/transitions-ogl.xml \
+    $(INSTROOT)/$(LIBO_SHARE_FOLDER)/config/soffice.cfg/simpress/transitions.xml \
 
 endif # !ENABLE_WASM_STRIP_BASIC_DRAW_MATH_IMPRESS
 

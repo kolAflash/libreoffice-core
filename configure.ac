@@ -3323,7 +3323,7 @@ if test "$enable_wasm_strip" = "yes"; then
 #    AC_DEFINE(ENABLE_WASM_STRIP_WRITER)  # TODO: doesn't make sense to always disable, not used in C++ code (also remove from config_wasm_strip.h.in)
 #    AC_DEFINE(ENABLE_WASM_STRIP_CALC)  # TODO: doesn't make sense to always disable, not used in C++ code (also remove from config_wasm_strip.h.in)
 #    AC_DEFINE(ENABLE_WASM_STRIP_CANVAS)  # TODO: doesn't make sense to always disable, not used in C++ code (also remove from config_wasm_strip.h.in)
-#    AC_DEFINE(ENABLE_WASM_STRIP_CHART)  # TODO: not used in C++ code (also remove from config_wasm_strip.h.in)
+#    AC_DEFINE(ENABLE_WASM_STRIP_CHART)  # TODO: always disabled!?
 #    AC_DEFINE(ENABLE_WASM_STRIP_DBACCESS)  # TODO: not used in C++ code (also remove from config_wasm_strip.h.in)
 #    AC_DEFINE(ENABLE_WASM_STRIP_EPUB)  # TODO: not used in C++ code (also remove from config_wasm_strip.h.in)
     AC_DEFINE(ENABLE_WASM_STRIP_EXTRA)
