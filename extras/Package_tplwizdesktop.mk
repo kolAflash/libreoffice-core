@@ -7,11 +7,11 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 
-$(eval $(call gb_Package_Package,extras_tplwizdesktop,$(gb_CustomTarget_workdir)/extras/source/templates/wizard/desktop))
+#$(eval $(call gb_Package_Package,extras_tplwizdesktop,$(gb_CustomTarget_workdir)/extras/source/templates/wizard/desktop))
 
-$(eval $(call gb_Package_add_files_with_dir,extras_tplwizdesktop,$(LIBO_SHARE_FOLDER)/template/common/internal,\
-	html.oth \
-	idxexample.odt \
-))
+#$(eval $(call gb_Package_add_files_with_dir,extras_tplwizdesktop,$(LIBO_SHARE_FOLDER)/template/common/internal,\
+#	html.oth \
+#	idxexample.odt \
+#))
 
 # vim: set noet sw=4 ts=4:

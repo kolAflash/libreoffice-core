@@ -33,8 +33,6 @@ $(eval $(call gb_Module_add_targets,extras,\
 	Package_labels \
 	$(if $(filter WNT,$(OS)),Package_newfiles) \
 	Package_palettes \
-	Package_tplpresnt \
-	Package_tplwizdesktop \
 	Package_wordbook \
 ))
 
@@ -50,13 +48,13 @@ $(eval $(call gb_Module_add_targets,extras,\
 ))
 endif
 
-ifneq ($(WITH_TEMPLATES),)
-$(eval $(call gb_Module_add_targets,extras,\
-	Package_templates \
-	Package_tplwizard \
-	Package_tplwizbitmap \
-))
-endif
+#ifneq ($(WITH_TEMPLATES),)
+#$(eval $(call gb_Module_add_targets,extras,\
+#	Package_templates \
+#	Package_tplwizard \
+#	Package_tplwizbitmap \
+#))
+#endif
 
 $(eval $(call gb_Module_add_targets,extras,\
 	Personas \

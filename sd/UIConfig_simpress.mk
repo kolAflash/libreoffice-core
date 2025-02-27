@@ -173,7 +173,8 @@ $(eval $(call gb_UIConfig_add_uifiles,modules/simpress,\
 	sd/uiconfig/simpress/ui/snapmenu \
 	sd/uiconfig/simpress/ui/tabviewbar \
 	sd/uiconfig/simpress/ui/tabledesignpanel \
-	sd/uiconfig/simpress/ui/templatedialog \
 ))
+
+#	sd/uiconfig/simpress/ui/templatedialog \
 
 # vim: set noet sw=4 ts=4:

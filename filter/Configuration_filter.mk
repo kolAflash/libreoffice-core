@@ -618,13 +618,14 @@ $(eval $(call filter_Configuration_add_types,fcfg_langpack,fcfg_impress_types.xc
 	MS_PowerPoint_2007_XML_Template \
 	MS_PowerPoint_2007_XML_VBA \
 	impress_OOXML_Presentation \
-	impress_OOXML_Presentation_Template \
 	impress_OOXML_Presentation_AutoPlay \
 	impress_ClarisWorks \
 	StarOffice_Presentation \
 	MWAW_Presentation \
 	impress_PowerPoint3 \
 ))
+
+#	impress_OOXML_Presentation_Template \
 
 $(eval $(call filter_Configuration_add_filters,fcfg_langpack,fcfg_impress_filters.xcu,filter/source/config/fragments/filters,\
 	AppleKeynote \
