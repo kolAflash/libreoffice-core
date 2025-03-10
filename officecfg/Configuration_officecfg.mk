@@ -56,6 +56,7 @@ $(eval $(call gb_Configuration_add_spool_modules,registry,officecfg/registry/dat
 	org/openoffice/Inet-macosx.xcu \
 	org/openoffice/Inet-unixdesktop.xcu \
 	org/openoffice/Inet-wnt.xcu \
+	org/openoffice/Office/Impress-wasm.xcu \
 	org/openoffice/Setup-writer.xcu \
 	org/openoffice/Setup-calc.xcu \
 	org/openoffice/Setup-draw.xcu \

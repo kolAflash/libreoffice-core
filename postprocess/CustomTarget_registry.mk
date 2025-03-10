@@ -270,7 +270,8 @@ postprocess_FILES_main := \
 	$(postprocess_MOD)/org/openoffice/TypeDetection/UISort-draw.xcu \
 	$(postprocess_MOD)/org/openoffice/TypeDetection/UISort-impress.xcu \
 	$(postprocess_MOD)/org/openoffice/TypeDetection/UISort-math.xcu \
-	$(postprocess_MOD)/org/openoffice/TypeDetection/UISort-writer.xcu
+	$(postprocess_MOD)/org/openoffice/TypeDetection/UISort-writer.xcu \
+	$(postprocess_MOD)/org/openoffice/Office/Impress-wasm.xcu \
 
 ifeq (MACOSX,$(OS))
 postprocess_FILES_main += \

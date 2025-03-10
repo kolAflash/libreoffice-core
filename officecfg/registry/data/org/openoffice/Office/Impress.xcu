@@ -65,6 +65,12 @@
     <prop oor:name="TransitionFiles" install:module="ogltrans">
       <value oor:separator=";">vnd.sun.star.expand:$BRAND_BASE_DIR/$BRAND_SHARE_SUBDIR/config/soffice.cfg/simpress/transitions.xml;vnd.sun.star.expand:$BRAND_BASE_DIR/$BRAND_SHARE_SUBDIR/config/soffice.cfg/simpress/transitions-ogl.xml</value>
     </prop>
+    <node oor:name="NewDoc">
+      <prop oor:name="AutoPilot">
+        <!-- false: AutoPilot dialog will crash when running as LOWA (WASM). -->
+        <value install:module="wasm">false</value>
+      </prop>
+    </node>
   </node>
   <node oor:name="Pictures" oor:op="fuse">
     <prop oor:name="Path">
